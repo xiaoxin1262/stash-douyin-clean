@@ -1,25 +1,60 @@
-mitm:
-  enabled: true
-  hostnames:
-    - "*.snssdk.com"
-    - "*.iesdouyin.com"
-    - "*.douyin.com"
-    - "aweme.snssdk.com"
-
-rewrite:
-  - match: ^https:\/\/api3-normal-c-hl\.snssdk\.com\/api\/ad\/display
-    rewrite: reject
-  - match: ^https:\/\/.*\/webcast\/(tab|feed|room|page)\/.*
-    rewrite: reject
-  - match: ^https:\/\/.*\/commerce_api\/.*
-    rewrite: reject
-  - match: ^https:\/\/.*\/activity\/activity_list\/.*
-    rewrite: reject
-  - match: ^https:\/\/.*\/notification\/v\d\/.*
-    rewrite: reject
-  - match: ^https:\/\/.*\/aweme\/v\d\/personalized_skin\/.*
-    rewrite: reject
-  - match: ^https:\/\/.*\/shopping\/.*
-    rewrite: reject
-  - match: ^https:\/\/aweme\.snssdk\.com\/aweme\/v\d\/nearby\/.*
-    rewrite: reject
+{
+  "rules": [
+    {
+      "name": "屏蔽开屏广告",
+      "type": "rewrite",
+      "enabled": true,
+      "match": "^https:\\/\\/api3-normal-c-hl\\.snssdk\\.com\\/api\\/ad\\/display",
+      "action": "reject"
+    },
+    {
+      "name": "屏蔽直播模块",
+      "type": "rewrite",
+      "enabled": true,
+      "match": "^https:\\/\\/.*\\/webcast\\/(tab|feed|room|page)\\/.*",
+      "action": "reject"
+    },
+    {
+      "name": "屏蔽商城接口",
+      "type": "rewrite",
+      "enabled": true,
+      "match": "^https:\\/\\/.*\\/commerce_api\\/.*",
+      "action": "reject"
+    },
+    {
+      "name": "屏蔽活动浮窗",
+      "type": "rewrite",
+      "enabled": true,
+      "match": "^https:\\/\\/.*\\/activity\\/activity_list\\/.*",
+      "action": "reject"
+    },
+    {
+      "name": "屏蔽推送通知",
+      "type": "rewrite",
+      "enabled": true,
+      "match": "^https:\\/\\/.*\\/notification\\/v\\d\\/.*",
+      "action": "reject"
+    },
+    {
+      "name": "屏蔽皮肤弹窗",
+      "type": "rewrite",
+      "enabled": true,
+      "match": "^https:\\/\\/.*\\/aweme\\/v\\d\\/personalized_skin\\/.*",
+      "action": "reject"
+    },
+    {
+      "name": "屏蔽带货橱窗",
+      "type": "rewrite",
+      "enabled": true,
+      "match": "^https:\\/\\/.*\\/shopping\\/.*",
+      "action": "reject"
+    },
+    {
+      "name": "屏蔽同城 / 附近页",
+      "type": "rewrite",
+      "enabled": true,
+      "match": "^https:\\/\\/aweme\\.snssdk\\.com\\/aweme\\/v\\d\\/nearby\\/.*",
+      "action": "reject"
+    }
+  ]
+}
