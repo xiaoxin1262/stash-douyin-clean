@@ -2,35 +2,13 @@ name: TikTok JP
 desc: 解锁 TikTok 日本地区
 author: Semporia
 
-rules:
-  - DOMAIN-SUFFIX,byteoversea.com
-  - DOMAIN-SUFFIX,ibytedtos.com
-  - DOMAIN-SUFFIX,ipstatp.com
-  - DOMAIN-SUFFIX,muscdn.com
-  - DOMAIN-SUFFIX,musical.ly
-  - DOMAIN-SUFFIX,tik-tokapi.com
-  - DOMAIN-SUFFIX,tiktok.com
-  - DOMAIN-SUFFIX,tiktokcdn.com
-  - DOMAIN-SUFFIX,tiktokv.com
-  - DOMAIN-KEYWORD,-tiktokcdn-com
-  - USER-AGENT,tiktok*
-
-rewrite:
-  - match: "(?<=_region=)CN(?=&)"
-    replace: "JP"
-    status: 307
-  - match: "(?<=&mcc_mnc=)4"
-    replace: "2"
-    status: 307
-  - match: "^(https?:\\/\\/(tnc|dm)[\\w-]+\\.\\w+\\.com\\/.+)(\\?)(.+)"
-    replace: "$1$4"
-    status: 302
-  - match: "(?<=\\d\\/\\?\\w{7}_\\w{4}=)1[6-9]..(?=.?.?&)"
-    replace: "18.4"
-    status: 307
-
-mitm:
-  hostnames:
-    - '*.tiktokv.com'
-    - '*.byteoversea.com'
-    - '*.tik-tokapi.com'
+http:
+  mitm:
+    - "*.tiktokv.com"
+    - "*.byteoversea.com"
+    - "*.tik-tokapi.com"
+  rewrite:
+    - (?<=_region=)CN(?=&) JP 307
+    - (?<=&mcc_mnc=)4 2 307
+    - ^(https?:\/\/(tnc|dm)[\w-]+\.\w+\.com\/.+)(\?)(.+) $1$4 302
+    - (?<=\d\/\?\w{7}_\w{4}=)1[6-9]..(?=.?.?&) 18.4 307
