@@ -1,0 +1,14 @@
+#!name = 小红书去广告
+#!author = 匿名
+#!description = 去除小红书搜索和首页信息流广告
+#!update = 2026-01-18
+#!version = 1.0
+
+# 小红书搜索页广告过滤
+^https:\/\/so\.xiaohongshu\.com\/api\/sns\/v\d+\/search\/notes url jsonjq-response-body .data.items |= map(select(.note?.type == "normal"))
+
+# 小红书首页信息流广告过滤
+^https:\/\/rec\.xiaohongshu\.com\/api\/sns\/v\d+\/homefeed url jsonjq-response-body .data |= map(select(.type == "normal"))
+
+# MITM主机名配置
+hostname = so.xiaohongshu.com, rec.xiaohongshu.com
